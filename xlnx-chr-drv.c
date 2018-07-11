@@ -188,13 +188,13 @@ static long chrdrv_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	switch(cmd) {
 
 		case IOC_SET:
-			raw_copy_from_user(&param_ioctl, (void*)arg, sizeof(param_ioctl));
+			copy_from_user(&param_ioctl, (void*)arg, sizeof(param_ioctl));
 			chrdrv_write_reg(priv, REG_1, param_ioctl);
 			break;
 
 		case IOC_GET:
 			param_ioctl = chrdrv_read_reg(priv, REG_1);
-			raw_copy_to_user((void*)arg, &param_ioctl, sizeof(param_ioctl));
+			copy_to_user((void*)arg, &param_ioctl, sizeof(param_ioctl));
 			break;
 
 		default :
